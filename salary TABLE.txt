@@ -1,0 +1,38 @@
+create table employee(emp_id int,emp_name varchar(30),gender varchar(7),phone char(10),email varchar(30),
+city varchar(15),address varchar(40),designation varchar(30),h_date varchar(12),basic_salary double,
+constraint p1 primary key(emp_id));
+,emp_name,designation,basic_salary));
+
+
+
+
+create table fund(emp_id int,fund_name varchar(30),fund_amt double,fund_date varchar(15),
+constraint f1 foreign key(emp_id)references employee (emp_id)on delete cascade); 
+
+
+
+create table abs(emp_id int,leave_name varchar(15),from_date varchar(15),to_date varchar(15),reason varchar(30),
+constraint f2 foreign key(emp_id)references employee (emp_id)on delete cascade); 
+
+
+
+create table salary(emp_id int,emp_name varchar(30),designation varchar(30),pay_date varchar(15),basic_salary double,
+hra double,da double,gross_tot double,pf double,esi double,loan double,profession_tax double,tot_ded double,net_sal double,
+constraint f13 foreign key(emp_id)references employee (emp_id)on delete cascade,
+constraint f14 foreign key(emp_name)references employee (emp_name)on delete cascade,
+constraint f15 foreign key(designation)references employee (designation)on delete cascade,
+constraint f16 foreign key(basic_salary)references employee (basic_salary)on delete cascade);
+
+
+
+------------------procedure--------------------
+delimiter $$
+create procedure countemployee1()
+Begin
+select count(*) as Total_number_of_employees from employee;
+end$$
+delimiter $$
+
+
+dilimiter ;
+call countemployee();
